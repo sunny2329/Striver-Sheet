@@ -67,7 +67,7 @@ void deleteNode(Node * node){
     Node *nxt = node -> next;
     Node * prev = NULL;
     while(nxt!=NULL){
-        node -> val = nxt -> val;
+        node -> data = nxt -> data;
         prev = node;
         node = nxt;
         nxt = nxt -> next;

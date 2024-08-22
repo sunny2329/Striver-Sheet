@@ -43,6 +43,13 @@ void reverseArr(int arr[],int start,int end){
     reverseArr(arr,start,end);
 }
 
+//! Reverse a string using recursion
+void reverseStr(string s, int start, int end){
+    if(start>=end) return;
+    swap(s[start],s[end]);
+    reverseStr(s,start+1,end-1);
+}
+
 //! Check if a string is a palindrome or not using recursion
 bool isPalindrome(string &s, int i){
     if(i>=s.length()/2) return true;
