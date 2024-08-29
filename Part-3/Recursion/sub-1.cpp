@@ -130,6 +130,35 @@ int perfectSum(int arr[], int n, int sum)
     return ans;
 }
 
+//! combination sum
+vector<vector<int>> res;
+void print_combo(int i, vector<int> &v, vector<int> &ans, int target)
+{
+    if (i == v.size())
+    {
+        if (target == 0)
+        {
+            res.push_back(ans);
+        }
+        return;
+    }
+    // pick same element :
+    if (v[i] <= target)
+    {
+        ans.push_back(v[i]);
+        print_combo(i, v, ans, target - v[i]);
+        ans.pop_back();
+    }
+    // not pick same element, picking next element :
+    print_combo(i + 1, v, ans, target);
+}
+vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+{
+    vector<int> ans;
+    print_combo(0, candidates, ans, target);
+    return res;
+}
+
 int main()
 {
     int n = 3;
