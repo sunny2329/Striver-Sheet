@@ -173,6 +173,41 @@ vector<int> searchRange(vector<int> &nums, int target)
     return ans;
 }
 
+//! Search In Rotated Array
+
+int rotateSearch(vector<int> &nums, int target)
+{
+    int n = nums.size();
+    int s = 0, e = n - 1;
+    int mid = s + (e - s) / 2;
+
+    while (s <= e)
+    {
+        if (nums[mid] == target)
+        {
+            return mid;
+        }
+        else if (nums[s] <= nums[mid])
+        {
+            if (target >= nums[s] && target < nums[mid])
+            {
+                e = mid - 1;
+            }
+            else
+                s = mid + 1;
+        }
+        else
+        {
+            if (target > nums[mid] && target <= nums[e])
+                s = mid + 1;
+            else
+                e = mid - 1;
+        }
+        mid = s + (e - s) / 2;
+    }
+    return -1;
+}
+
 int main()
 {
 }
