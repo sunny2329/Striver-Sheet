@@ -120,6 +120,59 @@ int findCeil(int arr[], int n, int x)
     return ans;
 }
 
+//! Search Range
+
+vector<int> searchRange(vector<int> &nums, int target)
+{
+    int sp = -1, ep = -1;
+    vector<int> ans(2, 0);
+    int s = 0, e = nums.size() - 1;
+    int mid = s + (e - s) / 2;
+
+    while (s <= e)
+    {
+        if (nums[mid] == target)
+        {
+            sp = mid;
+            e = mid - 1;
+        }
+        else if (nums[mid] < target)
+        {
+            s = mid + 1;
+        }
+        else
+        {
+            e = mid - 1;
+        }
+        mid = s + (e - s) / 2;
+    }
+
+    s = 0, e = nums.size() - 1;
+    mid = s + (e - s) / 2;
+
+    while (s <= e)
+    {
+        if (nums[mid] == target)
+        {
+            ep = mid;
+            s = mid + 1;
+        }
+        else if (nums[mid] < target)
+        {
+            s = mid + 1;
+        }
+        else
+        {
+            e = mid - 1;
+        }
+        mid = s + (e - s) / 2;
+    }
+
+    ans[0] = sp;
+    ans[1] = ep;
+    return ans;
+}
+
 int main()
 {
 }
