@@ -187,6 +187,79 @@ vector<vector<int>> combinationSum2(vector<int> &candidates, int target)
     return ans;
 }
 
+//! Subset sum
+
+void subsetSumHelper(int ind, vector<int> &arr, int n, vector<int> &ans, int sum)
+{
+    if (ind == n)
+    {
+        ans.push_back(sum);
+        return;
+    }
+
+    subsetSumHelper(ind + 1, arr, n, ans, sum + arr[ind]);
+    subsetSumHelper(ind + 1, arr, n, ans, sum);
+}
+
+vector<int> subsetSums(vector<int> arr, int n)
+{
+    vector<int> ans;
+    subsetSumHelper(0, arr, n, ans, 0);
+    sort(ans.begin(), ans.end());
+    return ans;
+}
+
+//! Subset sum 2
+void solve(int index, vector<int> &nums, vector<int> &ds, vector<vector<int>> &ans)
+{
+    ans.push_back(ds);
+    for (int i = index; i < nums.size(); i++)
+    {
+        if (i != index && nums[i] == nums[i - 1])
+            continue;
+        ds.push_back(nums[i]);
+        solve(i + 1, nums, ds, ans);
+        ds.pop_back();
+    }
+}
+vector<vector<int>> subsetsWithDup(vector<int> &nums)
+{
+    vector<vector<int>> ans;
+    vector<int> ds;
+    sort(nums.begin(), nums.end());
+    solve(0, nums, ds, ans);
+    return ans;
+}
+
+//! Combination sum 3
+
+vector<vector<int>> ans;
+int sum = 0;
+void dfs(vector<int> &cur, int k, int n, int idx)
+{
+    if (cur.size() == k and sum == n)
+    {
+        ans.push_back(cur);
+        return;
+    }
+    else if (cur.size() == k and sum > n)
+        return;
+    for (int i = idx; i <= 9; i++)
+    {
+        cur.push_back(i);
+        sum += i;
+        dfs(cur, k, n, i + 1);
+        cur.pop_back();
+        sum -= i;
+    }
+}
+vector<vector<int>> combinationSum3(int k, int n)
+{
+    vector<int> cur;
+    dfs(cur, k, n, 1);
+
+    return ans;
+}
 int main()
 {
     int n = 3;
