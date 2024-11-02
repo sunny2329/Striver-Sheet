@@ -49,6 +49,39 @@ bool check(vector<int> &nums)
     return count <= 1;
 }
 
+//! Remove duplicates
+
+int removeDuplicates(vector<int> &nums)
+{
+    int i = 1;
+    for (int j = 1; j < nums.size(); j++)
+    {
+        if (nums[j] != nums[j - 1])
+        {
+            nums[i] = nums[j];
+            i++;
+        }
+    }
+    return i;
+}
+
+//! Rotated Array
+
+void rotate(vector<int> &nums, int k)
+{
+    vector<int> temp(nums.size());
+
+    for (int i = 0; i < nums.size(); i++)
+    {
+        temp[(i + k) % nums.size()] = nums[i];
+    }
+    nums = temp;
+}
+
+
+
+//! Move Zeros
+
 int main()
 {
 }
