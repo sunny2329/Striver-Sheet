@@ -78,9 +78,102 @@ void rotate(vector<int> &nums, int k)
     nums = temp;
 }
 
-
-
 //! Move Zeros
+
+void moveZeroes(vector<int> &nums)
+{
+    int i = 0;
+    for (int j = 0; j < nums.size(); j++)
+    {
+        if (nums[j] != 0)
+        {
+            swap(nums[i], nums[j]);
+            i++;
+        }
+    }
+}
+
+//! Find the union
+
+vector<int> findUnion(vector<int> &a, vector<int> &b)
+{
+    // Your code here
+    // return vector with correct order of elements
+    int i = 0, j = 0;
+    vector<int> ans;
+
+    while (i < a.size() && j < b.size())
+    {
+        if (a[i] < b[j])
+        {
+            // Add a[i] if it's not a duplicate of the last element in ans
+            if (ans.empty() || ans.back() != a[i])
+            {
+                ans.push_back(a[i]);
+            }
+            i++;
+        }
+        else if (b[j] < a[i])
+        {
+            // Add b[j] if it's not a duplicate of the last element in ans
+            if (ans.empty() || ans.back() != b[j])
+            {
+                ans.push_back(b[j]);
+            }
+            j++;
+        }
+        else
+        { // a[i] == b[j]
+            // Add a[i] (or b[j]) only once if it's not a duplicate of the last element in ans
+            if (ans.empty() || ans.back() != a[i])
+            {
+                ans.push_back(a[i]);
+            }
+            i++;
+            j++;
+        }
+    }
+
+    // Add remaining elements from a, avoiding duplicates
+    while (i < a.size())
+    {
+        if (ans.empty() || ans.back() != a[i])
+        {
+            ans.push_back(a[i]);
+        }
+        i++;
+    }
+
+    // Add remaining elements from b, avoiding duplicates
+    while (j < b.size())
+    {
+        if (ans.empty() || ans.back() != b[j])
+        {
+            ans.push_back(b[j]);
+        }
+        j++;
+    }
+
+    return ans;
+}
+
+//! Find the missing number
+
+int missingNumber(vector<int> &nums)
+{
+    int n = nums.size();
+    int rsum = 0;
+    for (int i = 0; i <= n; i++)
+    {
+        rsum += i;
+    }
+    int sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += nums[i];
+    }
+    return rsum - sum;
+}
 
 int main()
 {
