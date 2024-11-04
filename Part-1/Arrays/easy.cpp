@@ -175,6 +175,104 @@ int missingNumber(vector<int> &nums)
     return rsum - sum;
 }
 
+//! Max Consecutive Ones
+
+int findMaxConsecutiveOnes(vector<int> &nums)
+{
+    int i = 0;
+    int count = 0;
+    int ans = 0;
+    while (i < nums.size())
+    {
+        if (nums[i] == 0)
+        {
+            ans = max(ans, count);
+            count = 0;
+        }
+        else
+        {
+            count++;
+        }
+        i++;
+    }
+    // Update ans one last time in case the array ends with a sequence of 1s
+    ans = max(ans, count);
+    return ans;
+}
+
+//! Single Number
+
+int singleNumber(vector<int> &nums)
+{
+    int ans = 0;
+    int i = 0;
+    while (i < nums.size())
+    {
+        ans = ans ^ nums[i];
+        i++;
+    }
+    return ans;
+}
+
+//! Longest Subarray with sum K (positives)
+
+int getLongestSubarray(vector<int> &a, long long k){
+    int left = 0, right = 0;
+    long long sum = 0;
+    int maxLen = 0;
+    int n = a.size();
+    while(right < n){
+        while(left <= right && sum > k){
+            sum -= a[left];
+            left++;
+        }
+
+        if(sum == k) maxLen = max(maxLen, right - left + 1);
+        right ++;
+        if(right < n) sum += a[right];
+    }
+    return maxLen;
+}
+
+
+//! Longest Subarray with sum K (both positives and negatives)
+
+
+int getLongestSubarrays(vector<int>& a, int k) {
+    int n = a.size(); // size of the array.
+
+    map<int, int> preSumMap;
+    int sum = 0;
+    int maxLen = 0;
+    for (int i = 0; i < n; i++) {
+        //calculate the prefix sum till index i:
+        sum += a[i];
+
+        // if the sum = k, update the maxLen:
+        if (sum == k) {
+            maxLen = max(maxLen, i + 1);
+        }
+
+        // calculate the sum of remaining part i.e. x-k:
+        int rem = sum - k;
+
+        //Calculate the length and update maxLen:
+        if (preSumMap.find(rem) != preSumMap.end()) {
+            int len = i - preSumMap[rem];
+            maxLen = max(maxLen, len);
+        }
+
+        //Finally, update the map checking the conditions:
+        if (preSumMap.find(sum) == preSumMap.end()) {
+            preSumMap[sum] = i;
+        }
+    }
+
+    return maxLen;
+}
+
+
+
 int main()
 {
 }
