@@ -1,0 +1,91 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node *next;
+
+    Node(int data)
+    {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+
+//! Middle of list
+Node *middleNode(Node *head)
+{
+    Node *fast = head->next;
+    Node *slow = head;
+    while (fast != NULL)
+    {
+        fast = fast->next;
+        if (fast != NULL)
+            fast = fast->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
+//! Reverse a LL
+
+Node *reverseLL(Node *head)
+{
+    if (head == NULL || head->next == NULL)
+        return head;
+    Node *curr = head;
+    Node *frwd = NULL;
+    Node *prev = NULL;
+    while (curr != NULL)
+    {
+        frwd = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = frwd;
+    }
+    return prev;
+}
+
+//! Has cycle
+
+bool hasCycle(Node *head)
+{
+    if (head == NULL)
+        return false;
+    Node *slow = head;
+    Node *fast = head->next;
+    while (fast != NULL)
+    {
+        if (fast == slow)
+            return true;
+        fast = fast->next;
+        if (fast != NULL)
+            fast = fast->next;
+        slow = slow->next;
+    }
+    return false;
+}
+
+//! Cycle 2
+
+Node *detectCycle(Node *head)
+{
+    unordered_map<Node *, bool> maps;
+    Node *temp = head;
+    while (temp != NULL)
+    {
+        if (maps[temp])
+        {
+            return temp;
+        }
+        maps[temp] = true;
+        temp = temp->next;
+    }
+    return NULL;
+}
+
+int main()
+{
+}
