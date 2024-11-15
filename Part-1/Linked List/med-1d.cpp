@@ -86,6 +86,39 @@ Node *detectCycle(Node *head)
     return NULL;
 }
 
+//! Length of loop cycle
+
+int countNodesinLoop(Node *head)
+{
+    // Code here
+    Node *slow = head, *fast = head;
+
+    // Detect if a loop exists using Floyd's Cycle Detection Algorithm
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+
+        // Loop detected
+        if (slow == fast)
+        {
+            int count = 1;
+            Node *temp = slow;
+
+            // Count the number of nodes in the loop
+            while (temp->next != slow)
+            {
+                count++;
+                temp = temp->next;
+            }
+            return count;
+        }
+    }
+
+    // If no loop exists 
+    return 0;
+}
+
 int main()
 {
 }
