@@ -2,6 +2,7 @@
 
 ## Part 1:
 
+- [ ] Basics
 - [ ] Arrays
 - [ ] Sorting
 - [ ] Bit Manipulation
