@@ -37,6 +37,21 @@ double switchCase(int choice, vector<double> &arr)
     return value;
 }
 
+// Fibonacci code using for loop 
+
+int fib(int n) {
+    if(n == 1 || n == 2) return 1;
+    int a = 1;
+    int b = 1;
+    int ans = 0;
+    for(int i = 3;i<n;i++){
+        ans = a+b;
+        a = b;
+        b = ans;
+    }
+    return b;
+}
+
 int main()
 {
     int x;
