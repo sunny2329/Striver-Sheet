@@ -3,11 +3,10 @@ using namespace std;
 
 //! Largest Element in an Array
 
-int largestElementInArray(vector<int> &arr)
-{
+int largestElementInArray(vector<int> & arr){
     int ans = INT_MIN;
     for(int i = 0;i<arr.size();i++){
-        ans = max(ans, arr[i]);
+        ans = max(ans,arr[i]);
     }
     return ans;
 }
@@ -52,6 +51,7 @@ bool check(vector<int> &nums){
 int main()
 {
     vector<int> arr = {-199,222,341,5,45};
-    cout << "Largest Element in the Array: " << secondLargestElement(arr) << endl;
+    cout << "Second Largest Element in the Array: " << secondLargestElement(arr) << endl;
+    cout << "Largest Element in the Array:" << largestElementInArray(arr) << endl;
     return 0;
 }
